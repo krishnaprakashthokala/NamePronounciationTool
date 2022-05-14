@@ -1,11 +1,17 @@
 package com.example.Pronounciation;
 import com.azure.core.http.ProxyOptions;
 import com.azure.core.http.netty.NettyAsyncHttpClientBuilder;
+import com.azure.core.util.BinaryData;
+import com.azure.core.util.Context;
 import com.azure.identity.DefaultAzureCredentialBuilder;
 import com.azure.identity.ManagedIdentityCredential;
 import com.azure.identity.ManagedIdentityCredentialBuilder;
+import com.azure.storage.blob.BlobClient;
+import com.azure.storage.blob.BlobContainerClient;
 import com.azure.storage.blob.BlobServiceClient;
 import com.azure.storage.blob.BlobServiceClientBuilder;
+import com.azure.storage.blob.models.BlobRequestConditions;
+import com.azure.storage.blob.options.BlobParallelUploadOptions;
 import com.azure.storage.blob.sas.BlobContainerSasPermission;
 import com.azure.storage.blob.sas.*;
 import com.azure.storage.common.sas.AccountSasPermission;
@@ -18,9 +24,14 @@ import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 import org.springframework.core.io.Resource;
+import org.springframework.util.StreamUtils;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.nio.charset.Charset;
 import java.time.OffsetDateTime;
 @Service
 public class PronounciationService {
@@ -92,8 +103,8 @@ return sasToken;
 
     public void downloadBlob(){
           String storageConnectionString2 =
-                "DefaultEndpointsProtocol=http;" +
-                        "BlobEndpoint=https://krishnau743622.blob.core.windows.net/"+
+                "DefaultEndpointsProtocol=https;" +
+
                         "AccountName=krishnau743622;" +
                         "AccountKey=75vP5cmd2vTGdjTztXNNOTwAoonh+QPJ5IsqM6tD8/uwD1tpQK18vj6wfDKCvTk8mE4zNtgalTP1+ASt8+RqDQ==";
         try
@@ -139,5 +150,74 @@ return sasToken;
 
         }
         return file;
+    }
+
+    public String downloadFile(String id) throws IOException {
+        String str = null;
+        BlobServiceClient blobServiceClient = new BlobServiceClientBuilder()
+                .endpoint("https://krishnau743622.blob.core.windows.net/")
+                .sasToken("?sv=2020-08-04&ss=bfqt&srt=sco&sp=rwdlacupitfx&se=2022-08-30T22:04:58Z&st=2022-05-14T14:04:58Z&spr=https&sig=rXIUPqY4ECwJlBQa8p4OLvgs6BoGqC%2FcafnlBVT%2FqwM%3D")
+                .buildClient();
+        BlobContainerClient blobContainerClient = blobServiceClient.getBlobContainerClient("krishnacontainer");
+       // BlobClient blobClient = blobContainerClient.getBlobClient("sample-mp4-file-small.mp4");
+         BlobClient blobClient = blobContainerClient.getBlobClient(id);
+
+        //  System.out.println(" blobclient  "  + blobClient.downloadContent());
+      /*  try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
+            blobClient.downloadStream(outputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+
+        str = StreamUtils.copyToString(
+                blobClient.downloadContent().toStream(),
+                // blobFile.getInputStream(),
+
+                Charset.defaultCharset());
+        //System.out.println(" Data File    "  + str);
+        return str;
+    }
+
+
+    public void uploadFile(String myblock, String data) throws IOException {
+        String str = null;
+        BlobServiceClient blobServiceClient = new BlobServiceClientBuilder()
+                .endpoint("https://krishnau743622.blob.core.windows.net/")
+                .sasToken("?sv=2020-08-04&ss=bfqt&srt=sco&sp=rwdlacupitfx&se=2022-08-30T22:04:58Z&st=2022-05-14T14:04:58Z&spr=https&sig=rXIUPqY4ECwJlBQa8p4OLvgs6BoGqC%2FcafnlBVT%2FqwM%3D")
+                .buildClient();
+        BlobContainerClient blobContainerClient = blobServiceClient.getBlobContainerClient("krishnacontainer");
+        BlobClient blobClient = blobContainerClient.getBlobClient(myblock);
+        //  System.out.println(" blobclient  "  + blobClient.downloadContent());
+      /*  try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
+            blobClient.downloadStream(outputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+        String dataSample = data;
+       // blobClient.upload(BinaryData.fromString(dataSample));
+
+        try (ByteArrayInputStream dataStream = new ByteArrayInputStream(dataSample.getBytes())) {
+            blobClient.upload(dataStream, dataSample.length(), true /* overwrite */);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try (ByteArrayInputStream dataStream = new ByteArrayInputStream(dataSample.getBytes())) {
+            BlobParallelUploadOptions options =
+                    new BlobParallelUploadOptions(dataStream, dataSample.length());
+            // Setting IfMatch="*" ensures the upload will succeed only if there is already a blob at the destination.
+            options.setRequestConditions(new BlobRequestConditions().setIfMatch("*"));
+            blobClient.uploadWithResponse(options, null, Context.NONE);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+       // blobClient.upload(BinaryData.fromString(dataSample));
+        str = StreamUtils.copyToString(
+                blobClient.downloadContent().toStream(),
+                // blobFile.getInputStream(),
+
+                Charset.defaultCharset());
+        System.out.println(" Data File    "  + str);
+
     }
 }

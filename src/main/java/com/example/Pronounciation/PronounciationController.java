@@ -59,13 +59,23 @@ public class PronounciationController {
         return "file was updated";
     }
     @GetMapping("/download")
-    public void download() throws IOException {
-        service.downloadBlob();
+    public String download(@RequestBody PronounciationToolDataReq req) throws IOException {
+      return service.downloadFile(req.getId());
       //  return StreamUtils.copyToString(
                 //this.blobFile.getInputStream(),
               //  blobFile.getInputStream(),
 
              //   Charset.defaultCharset());
+    }
+
+    @PutMapping("/uploadFile")
+    public void uploadFile(@RequestBody PronounciationToolDataReq req)  throws IOException {
+        service.uploadFile(req.getId(), req.getCustomInput());
+        //  return StreamUtils.copyToString(
+        //this.blobFile.getInputStream(),
+        //  blobFile.getInputStream(),
+
+        //   Charset.defaultCharset());
     }
 
 }
