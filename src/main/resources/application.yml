@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    azure:
+      storage:
+        blob:
+          account-name: krishnau743622
+          account-key: 75vP5cmd2vTGdjTztXNNOTwAoonh+QPJ5IsqM6tD8/uwD1tpQK18vj6wfDKCvTk8mE4zNtgalTP1+ASt8+RqDQ==
+          endpoint: https://krishnau743622.blob.core.windows.net/
