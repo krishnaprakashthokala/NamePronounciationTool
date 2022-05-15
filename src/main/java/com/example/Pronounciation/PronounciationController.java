@@ -70,7 +70,7 @@ public class PronounciationController {
 
     @PutMapping("/uploadFile")
     public void uploadFile(@RequestBody PronounciationToolDataReq req)  throws IOException {
-        service.uploadFile(req.getId(), req.getCustomInput());
+        service.uploadFile(req.getId(), req.getCustomInput(), req);
         //  return StreamUtils.copyToString(
         //this.blobFile.getInputStream(),
         //  blobFile.getInputStream(),

@@ -8,6 +8,18 @@ public class PronounciationToolDataReq {
     private String  standardInput;
     private String customInput;
     private String country;
+    private String id;
+
+    public String getLanId() {
+        return lanId;
+    }
+
+    public void setLanId(String lanId) {
+        this.lanId = lanId;
+    }
+
+    private String lanId;
+
 
     public String getId() {
         return id;
@@ -17,7 +29,6 @@ public class PronounciationToolDataReq {
         this.id = id;
     }
 
-    private String id;
 
     public String getFirstName() {
         return firstName;

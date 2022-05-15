@@ -20,11 +20,15 @@ import com.azure.storage.common.sas.*;
 import com.microsoft.azure.storage.*;
 import com.microsoft.azure.storage.blob.*;
 import com.microsoft.windowsazure.serviceruntime.RoleEnvironment;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 import org.springframework.core.io.Resource;
+import org.springframework.util.Assert;
 import org.springframework.util.StreamUtils;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -33,8 +37,12 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.charset.Charset;
 import java.time.OffsetDateTime;
+import java.util.Optional;
+
 @Service
 public class PronounciationService {
+    @Autowired
+    private UserRepository repository;
     public static final String storageConnectionString =
             "DefaultEndpointsProtocol=http;" +
                     "AccountName=krishnau743622;" +
@@ -179,7 +187,7 @@ return sasToken;
     }
 
 
-    public void uploadFile(String myblock, String data) throws IOException {
+    public void uploadFile(String myblock, String data, PronounciationToolDataReq req) throws IOException {
         String str = null;
         BlobServiceClient blobServiceClient = new BlobServiceClientBuilder()
                 .endpoint("https://krishnau743622.blob.core.windows.net/")
@@ -218,6 +226,42 @@ return sasToken;
 
                 Charset.defaultCharset());
         System.out.println(" Data File    "  + str);
+        saveUserDetails( req);
+
+    }
+
+    public void saveUserDetails(PronounciationToolDataReq req){
+        User testUser = new User();
+        testUser.setFirstName(req.getFirstName());
+        testUser.setLastName(req.getLastName());
+      //  testUser.setUid(req.getId());
+        testUser.setId(req.getLanId());
+
+        // Save the User class to Azure Cosmos DB database.
+        final Mono<User> saveUserMono = repository.save(testUser);
+        final User savedUser = saveUserMono.block();
+
+        final Flux<User> firstNameUserFlux = repository.findByFirstName("a");
+        Flux<User> t =  repository.findAll();
+        firstNameUserFlux.collectList().block();
+        //  Nothing happens until we subscribe to these Monos.
+        //  findById will not return the user as user is not present.
+      //  final Mono<User> findByIdMono = repository.findById(testUser.getId());
+       // final User findByIdUser = findByIdMono.block();
+       // Assert.isNull(findByIdUser, "User must be null");
+
+       // final User savedUser = saveUserMono.block();
+        //Assert.state(savedUser != null, "Saved user must not be null");
+       // Assert.state(savedUser.getFirstName().equals(testUser.getFirstName()), "Saved user first name doesn't match");
+
+       // firstNameUserFlux.collectList().block();
+
+       // final Optional<User> optionalUserResult = repository.findById(testUser.getId()).blockOptional();
+     //   Assert.isTrue(optionalUserResult.isPresent(), "Cannot find user.");
+
+       // final User result = optionalUserResult.get();
+       // Assert.state(result.getFirstName().equals(testUser.getFirstName()), "query result firstName doesn't match!");
+       // Assert.state(result.getLastName().equals(testUser.getLastName()), "query result lastName doesn't match!");
 
     }
 }
